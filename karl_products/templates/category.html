@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+<body>
+    <div class="container page-top-pad">
+        <div class="row karl-new-arrivals">
+            {% for i in product_cats %}
+            <!-- Single gallery Item Start -->
+            <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.2s">
+                <a href="../single/{{ i.slug }}">
+                <!-- Product Image -->
+                <div class="product-img">
+                   <img src="../{{ i.image }}" alt="" style="width: 100%; height: 505px;">
+                    <div class="product-quicview">
+                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
+                    </div>
+                </div>
+                <!-- Product Description -->
+                <div class="product-description">
+                    <h4 class="product-price">${{ i.price }}</h4>
+                    <p>{{ i.name }}</p>
+                    <!-- Add to Cart -->
+                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+                </div>
+            </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+{% endblock body %}

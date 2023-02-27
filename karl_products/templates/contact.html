@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% block body %}
+<style>
+  .contact-form {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #ccc;
+  }
+  
+  .contact-form h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .contact-form .form-group {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form input[type="tel"],
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+  
+  .contact-form textarea {
+    height: 120px;
+  }
+  
+  .contact-form .submit-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .contact-form .submit-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  
+</style>
+
+<div class="contact-form page-top-pad">
+  <h2>Contact Us</h2>
+  <form method="post" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <p id="name-error" class="error"></p>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <p id="email-error" class="error"></p>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone">
+      <p id="phone-error" class="error"></p>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" rows="5"></textarea>
+      <p id="description-error" class="error"></p>
+    </div>
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
+
+<script>
+  function validateForm() {
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let description = document.getElementById("description").value;
+    let email = document.getElementById("email").value;
+    let phone_regex = /((\+92)|0)[.\- ]?[0-9][.\- ]?[0-9][.\- ]?[0-9]/;
+    let email_regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    let letters = /^[a-zA-Z ]*$/;
+    if(name==""){
+      document.getElementById("name-error").innerHTML =
+          "required";
+        return false;
+    }
+    else{
+      document.getElementById("name-error").innerHTML =
+          "";
+    }
+    if(email==""){
+      document.getElementById("email-error").innerHTML =
+          "required";
+        return false;
+    }
+    else{
+      document.getElementById("email-error").innerHTML =
+          "";
+    }
+    if(phone==""){
+      document.getElementById("phone-error").innerHTML =
+          "required";
+        return false;
+    }
+    else{
+      document.getElementById("phone-error").innerHTML =
+          "";
+    }
+    if(description==""){
+      document.getElementById("description-error").innerHTML =
+          "required";
+        return false;
+    }
+    else{
+      document.getElementById("description-error").innerHTML = "";
+    }
+    if (!name.match(letters)) {
+      document.getElementById("name-error").innerHTML =
+        "Name can only contain letters";
+        return false;
+    } 
+    else{
+      document.getElementById("name-error").innerHTML = "";
+    }
+    if (!email.match(email_regex)) {
+      document.getElementById("email-error").innerHTML =
+        "Invalid email address";
+        return false;
+    } 
+    else{
+      document.getElementById("email-error").innerHTML = "";
+    }
+    if (!phone.match(phone_regex)) {
+      document.getElementById("phone-error").innerHTML =
+        "Invalid phone number";
+        return false;
+    } 
+    else{
+      document.getElementById("phone-error").innerHTML = "";
+    }
+}
+  
+</script>
+{% endblock body %}

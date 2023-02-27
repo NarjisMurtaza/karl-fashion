@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block body %}
+<style>
+/* You can style the elements in the login form as per your preference */
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  margin-bottom: 0.5em;
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input[type="submit"],.para-signup {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+}
+.para-signup{
+  background-color: #3d709b;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+p {
+  margin: 0.5em 0;
+  color: red;
+}
+.signup-p{
+  text-align: center;
+}
+.form-login{
+  margin: 4em 0;
+}
+
+</style>
+<section  class="form-login">
+<form method="POST" action = "">
+  <h1>Login</h1>
+
+    {% csrf_token %}
+
+    <label>Username: </label>
+    <input type="text" name="username">
+    <label>Password: </label>
+    <input type="password" name="password">
+    <input type="submit" name="login">
+</form>
+<p class="signup-p">Dont have an account? <a href="/register" class="para-signup">Signup</a></p>
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+</section>
+{% endblock body %}

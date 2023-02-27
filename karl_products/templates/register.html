@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block body %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+      
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      
+      form {
+        width: 50%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      
+      p {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .para-signup{
+  background-color: #3d709b;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: white;
+}
+    </style>
+
+<h1>Register</h1>
+<form method="POST" action ="">
+    {% csrf_token %} 
+    {{ form.username.label }}
+    {{ form.username }}
+    {{ form.email.label }}
+    {{ form.email }}
+    {{ form.password1.label }}
+    {{ form.password1 }}
+    {{ form.password2.label }}
+    {{ form.password2 }}
+    <input type="submit" name="create_user" value="Register">
+    {% for field in form %}
+    <p>{{ field.errors }}</p>
+{% endfor %}
+    <p>Already have an account? <a href="\login/" class="para-signup">login</a></p>
+</form>
+
+{% endblock body %}
+
+
